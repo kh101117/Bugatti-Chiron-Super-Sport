@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bugatti Chiron Super Sport</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background: #0c0c0c;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.8);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: #f5b400;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: url('https://cdn.motor1.com/images/mgl/1x9nN/s1/bugatti-chiron-super-sport-300.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 0;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      color: #f5b400;
+      z-index: 1;
+      text-shadow: 0 0 15px #000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 60px 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 30px rgba(255, 193, 7, 0.2);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h2 {
+      color: #f5b400;
+      margin-bottom: 20px;
+      font-size: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      font-size: 1.1rem;
+    }
+
+    .stat {
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid #333;
+      text-align: center;
+      box-shadow: 0 0 10px #f5b40044;
+    }
+
+    .stat strong {
+      color: #f5b400;
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      padding-top: 10px;
+    }
+
+    .btn {
+      margin-top: 25px;
+      display: inline-block;
+      padding: 12px 30px;
+      background: #f5b400;
+      color: black;
+      font-weight: bold;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #ffe600;
+      transform: scale(1.05);
+    }
+
+    .gauge-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    canvas {
+      background: #111;
+      border-radius: 50%;
+      margin: 20px auto;
+    }
+
+    .video-section {
+      text-align: center;
+      margin: 60px 0;
+    }
+
+    .video-section iframe {
+      width: 90%;
+      height: 500px;
+      border: none;
+      border-radius: 20px;
+    }
+
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .carousel img {
+      height: 250px;
+      border-radius: 15px;
+      scroll-snap-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #888;
+      font-size: 0.9rem;
+      background: #0a0a0a;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div><a href="#">Chiron Super Sport</a></div>
+    <div>
+      <a href="#specs">Specs</a>
+      <a href="#video">Video</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Bugatti Chiron Super Sport</h1>
+  </section>
+
+  <div class="container" id="specs">
+    <div class="card">
+      <h2>Performance Stats</h2>
+      <div class="stats-grid">
+        <div class="stat"><strong>8.0L</strong>Quad-Turbo W16</div>
+        <div class="stat"><strong>1,578</strong>Horsepower</div>
+        <div class="stat"><strong>1,180</strong>lb-ft Torque</div>
+        <div class="stat"><strong>273 mph</strong>Top Speed</div>
+        <div class="stat"><strong>2.3 sec</strong>0–60 mph</div>
+        <div class="stat"><strong>$3.9M</strong>Price</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Speed Gauge</h2>
+      <div class="gauge-container">
+        <canvas id="speedGauge" width="250" height="250"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="video">
+    <div class="card video-section">
+      <h2>Watch the Beast in Action</h2>
+      <iframe src="https://www.youtube.com/embed/UuCjQ7c4mHk" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div class="container" id="gallery">
+    <div class="card">
+      <h2>Gallery</h2>
+      <div class="carousel">
+        <img src="https://cdn.motor1.com/images/mgl/pbX1v/s1/bugatti-chiron-super-sport.jpg" />
+        <img src="https://cdn.motor1.com/images/mgl/0ANWl/s1/bugatti-chiron-super-sport.jpg" />
+        <img src="https://cdn.motor1.com/images/mgl/lJBBz/s1/bugatti-chiron-super-sport.jpg" />
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSupGhYb0ohCRLm9PHaxQnrtzBs5SorCabl7A&s" />
+      </div>
+    </div>
+  </div>
+
+  <div class="container" id="about">
+    <div class="card description">
+      <h2>About the Chiron Super Sport</h2>
+      <p>
+        The Bugatti Chiron Super Sport isn’t just fast — it's legendary. With 1,578 horsepower and a top speed of 273 mph, it's one of the fastest production cars on the planet.
+      </p>
+      <p>
+        Sculpted with aerospace precision and powered by a beastly quad-turbo W16, the Chiron Super Sport is a masterpiece of engineering and luxury — built for those who demand the absolute best.
+      </p>
+      <a href="#video" class="btn">See It in Action</a>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Bugatti Supercars | Designed by a true car enthusiast
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('speedGauge');
+    const ctx = canvas.getContext('2d');
+
+    let speed = 0;
+    function drawGauge(val) {
+      ctx.clearRect(0, 0, 250, 250);
+      ctx.beginPath();
+      ctx.arc(125, 125, 100, Math.PI, Math.PI + (val / 273) * Math.PI, false);
+      ctx.strokeStyle = '#f5b400';
+      ctx.lineWidth = 15;
+      ctx.stroke();
+
+      ctx.fillStyle = 'white';
+      ctx.font = '20px Orbitron';
+      ctx.textAlign = 'center';
+      ctx.fillText(val.toFixed(0) + ' mph', 125, 135);
+    }
+
+    function animateSpeed() {
+      if (speed < 273) {
+        speed += 2;
+        drawGauge(speed);
+        requestAnimationFrame(animateSpeed);
+      }
+    }
+    animateSpeed();
+  </script>
+</body>
+</html>
