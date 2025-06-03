@@ -166,16 +166,52 @@
 
     .carousel {
       display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
       gap: 20px;
       padding: 30px;
+      overflow-x: hidden; /* Remove scrollbar */
+      position: relative;
     }
 
     .carousel img {
-      height: 250px;
+      height: 150px;
       border-radius: 15px;
-      scroll-snap-align: center;
+    }
+
+    /* Arrow button styles */
+    .arrow-btn {
+      background: #f5b400;
+      color: black;
+      border: none;
+      font-size: 24px;
+      padding: 12px 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+      z-index: 999;
+      top: 50%;
+      transform: translateY(-50%);
+      display: none;
+    }
+
+    .arrow-btn:hover {
+      background: #ffe600;
+      transform: scale(1.05);
+    }
+
+    /* Left arrow */
+    .arrow-left {
+      left: 10px;
+    }
+
+    /* Right arrow */
+    .arrow-right {
+      right: 10px;
+    }
+
+    /* Show arrows when hovering over the carousel */
+    .carousel:hover .arrow-btn {
+      display: block;
     }
 
     footer {
@@ -224,13 +260,6 @@
         <div class="stat"><strong>$3.9M</strong>Price</div>
       </div>
     </div>
-
-    <div class="card">
-      <h2>Speed Gauge</h2>
-      <div class="gauge-container">
-        <canvas id="speedGauge" width="250" height="250"></canvas>
-      </div>
-    </div>
   </div>
 
   <div class="container" id="video">
@@ -244,11 +273,14 @@
     <div class="card">
       <h2>Gallery</h2>
       <div class="carousel">
-        <img src="https://cdn.motor1.com/images/mgl/pbX1v/s1/bugatti-chiron-super-sport.jpg" />
-        <img src="https://cdn.motor1.com/images/mgl/0ANWl/s1/bugatti-chiron-super-sport.jpg" />
-        <img src="https://cdn.motor1.com/images/mgl/lJBBz/s1/bugatti-chiron-super-sport.jpg" />
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSupGhYb0ohCRLm9PHaxQnrtzBs5SorCabl7A&s" />
+        <img src="https://s1.cdn.autoevolution.com/images/gallery/BUGATTI-Chiron-Super-Sport-300-6665_3.jpg" />
+        <img src="https://media.whichcar.com.au/uploads/2025/02/67568a46-Bugatti-Chiron-longtail-prototype-tail.jpg" />
       </div>
+
+      <!-- Arrow buttons -->
+      <button class="arrow-btn arrow-left" onclick="scrollGallery('left')">&#8592;</button>
+      <button class="arrow-btn arrow-right" onclick="scrollGallery('right')">&#8594;</button>
     </div>
   </div>
 
@@ -270,32 +302,16 @@
   </footer>
 
   <script>
-    const canvas = document.getElementById('speedGauge');
-    const ctx = canvas.getContext('2d');
-
-    let speed = 0;
-    function drawGauge(val) {
-      ctx.clearRect(0, 0, 250, 250);
-      ctx.beginPath();
-      ctx.arc(125, 125, 100, Math.PI, Math.PI + (val / 273) * Math.PI, false);
-      ctx.strokeStyle = '#f5b400';
-      ctx.lineWidth = 15;
-      ctx.stroke();
-
-      ctx.fillStyle = 'white';
-      ctx.font = '20px Orbitron';
-      ctx.textAlign = 'center';
-      ctx.fillText(val.toFixed(0) + ' mph', 125, 135);
-    }
-
-    function animateSpeed() {
-      if (speed < 273) {
-        speed += 2;
-        drawGauge(speed);
-        requestAnimationFrame(animateSpeed);
+    function scrollGallery(direction) {
+      const gallery = document.querySelector('.carousel');
+      const scrollAmount = 200; // Adjust scroll speed
+      
+      if (direction === 'left') {
+        gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else if (direction === 'right') {
+        gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
     }
-    animateSpeed();
   </script>
 </body>
 </html>
