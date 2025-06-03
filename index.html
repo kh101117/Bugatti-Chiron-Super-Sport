@@ -6,6 +6,7 @@
   <title>Bugatti Chiron Super Sport</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
   <style>
+    /* (your CSS stays the same — unchanged) */
     * {
       margin: 0;
       padding: 0;
@@ -168,7 +169,7 @@
       display: flex;
       gap: 20px;
       padding: 30px;
-      overflow-x: hidden; /* Remove scrollbar */
+      overflow-x: hidden;
       position: relative;
     }
 
@@ -177,7 +178,6 @@
       border-radius: 15px;
     }
 
-    /* Arrow button styles */
     .arrow-btn {
       background: #f5b400;
       color: black;
@@ -199,17 +199,9 @@
       transform: scale(1.05);
     }
 
-    /* Left arrow */
-    .arrow-left {
-      left: 10px;
-    }
+    .arrow-left { left: 10px; }
+    .arrow-right { right: 10px; }
 
-    /* Right arrow */
-    .arrow-right {
-      right: 10px;
-    }
-
-    /* Show arrows when hovering over the carousel */
     .carousel:hover .arrow-btn {
       display: block;
     }
@@ -260,6 +252,14 @@
         <div class="stat"><strong>$3.9M</strong>Price</div>
       </div>
     </div>
+
+    <!-- 👇 Speed Gauge added here -->
+    <div class="card">
+      <h2>Speed Gauge</h2>
+      <div class="gauge-container">
+        <canvas id="speedGauge" width="250" height="250"></canvas>
+      </div>
+    </div>
   </div>
 
   <div class="container" id="video">
@@ -277,8 +277,6 @@
         <img src="https://s1.cdn.autoevolution.com/images/gallery/BUGATTI-Chiron-Super-Sport-300-6665_3.jpg" />
         <img src="https://media.whichcar.com.au/uploads/2025/02/67568a46-Bugatti-Chiron-longtail-prototype-tail.jpg" />
       </div>
-
-      <!-- Arrow buttons -->
       <button class="arrow-btn arrow-left" onclick="scrollGallery('left')">&#8592;</button>
       <button class="arrow-btn arrow-right" onclick="scrollGallery('right')">&#8594;</button>
     </div>
@@ -301,17 +299,47 @@
     &copy; 2025 Bugatti Supercars | Designed by a true car enthusiast
   </footer>
 
+  <!-- Gallery scroll -->
   <script>
     function scrollGallery(direction) {
       const gallery = document.querySelector('.carousel');
-      const scrollAmount = 200; // Adjust scroll speed
-      
+      const scrollAmount = 200;
       if (direction === 'left') {
         gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
       } else if (direction === 'right') {
         gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
     }
+  </script>
+
+  <!-- Speed Gauge animation -->
+  <script>
+    const canvas = document.getElementById('speedGauge');
+    const ctx = canvas.getContext('2d');
+
+    let speed = 0;
+    function drawGauge(val) {
+      ctx.clearRect(0, 0, 250, 250);
+      ctx.beginPath();
+      ctx.arc(125, 125, 100, Math.PI, Math.PI + (val / 273) * Math.PI, false);
+      ctx.strokeStyle = '#f5b400';
+      ctx.lineWidth = 15;
+      ctx.stroke();
+
+      ctx.fillStyle = 'white';
+      ctx.font = '20px Orbitron';
+      ctx.textAlign = 'center';
+      ctx.fillText(val.toFixed(0) + ' mph', 125, 135);
+    }
+
+    function animateSpeed() {
+      if (speed < 273) {
+        speed += 2;
+        drawGauge(speed);
+        requestAnimationFrame(animateSpeed);
+      }
+    }
+    animateSpeed();
   </script>
 </body>
 </html>
